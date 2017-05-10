@@ -1,0 +1,15 @@
+a=[]
+t=0
+while t < 5:
+    b = raw_input('Pls input a number:')
+    a.append(b)
+    t += 1
+
+i=0
+j=0
+while i < len(a):
+    j += int(a[i])
+#    j += a[i]
+    i += 1
+
+print(j)
