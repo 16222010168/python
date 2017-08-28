@@ -1,4 +1,4 @@
-class Fridge:
+class Fridge:   #This is a test edit,pls pay attention!
 	def __init__(self,items={}):
 		if type(items) != type({}):
 			raise TypeError("Fridge requires a dictionary but was given %s" % type(items))
