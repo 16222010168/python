@@ -6,30 +6,34 @@ ywpasswd = {'10.100.8.107':'1qaz2wsx','10.100.8.108':'1qaz2wsx','10.100.8.106':'
 rootpasswd = {'10.1.1.206':'1qaz&ujm','10.1.1.211':'1qaz@WSX','10.1.1.204':'qp0512sap','10.1.1.210':'1qaz@WSX','10.100.8.49':'root'}
 ipaddr = account.keys()
 source = raw_input('Source Path:')
-destination = raw_input('destination path:')
-fn = raw_input('file name:')
+destination = raw_input('Destination Path:')
+fn = raw_input('File Name:')
 
 for i in ipaddr:
-    child = pexpect.spawn('ftp ' + i)
-    fout = file('ftplog.log','a')
-    child.logfile = fout
-    child.expect('(?i)name .*: ')
-    child.sendline(account[i])
+        print ("Connecting host: %s"%i)
+        child = pexpect.spawn('ftp ' + i)
+        fout = file('ftplog.log','a')
+        child.logfile = fout
+        child.expect('(?i)name .*: ')
+        child.sendline(account[i])
 
-    if account[i] == 'yunwei':
-        passwd = ywpasswd[i]
-    elif account[i] == 'root':
-        passwd = rootpasswd[i]
+        if account[i] == 'yunwei':
+            passwd = ywpasswd[i]
+        elif account[i] == 'root':
+            passwd = rootpasswd[i]
 
-    child.expect('(?i)password:')
-    child.sendline(passwd)
-    child.expect('ftp>')
-    child.sendline('cd ' + source)
-    child.expect('ftp>')
-    child.sendline('lcd ' + destination)
-    child.expect('ftp>')
-    child.sendline('bin')
-    child.expect('ftp>')
-    child.sendline('put ' + fn)
-    child.expect('ftp>')
-    child.sendline('by')
+        child.expect('(?i)password:')
+
+        child.sendline(passwd)
+        print ("Host: %s login successful"%i)
+
+        child.expect('ftp>')
+        child.sendline('cd ' + destination)
+        child.expect('ftp>')
+        child.sendline('lcd ' + source)
+        child.expect('ftp>')
+        child.sendline('bin')
+        child.expect('ftp>')
+        child.sendline('put ' + fn)
+        child.expect('ftp>')
+        child.sendline('by')
