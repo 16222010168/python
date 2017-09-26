@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pexpect
 
-def GetPasswd(path):
+def GetPasswd(path):      #This foundation is to generate a dictionary which contain host ip and password.
 
     f = open(path,'r')
     tmp = []
@@ -19,7 +19,7 @@ def GetPasswd(path):
     host_dict = dict(zip(host,passwd))
     return host_dict
 
-account = GetPasswd('ipaddr.txt')
+account = GetPasswd('ipaddr.txt')        #ipaddr.txt is a config file which include host ip and password. You should follow the format to write this config file.
 source = raw_input('Source Path:')
 destination = raw_input('Destination Path:')
 file_name = raw_input('File Name:')
